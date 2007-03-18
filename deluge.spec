@@ -1,13 +1,13 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	0.4.99.2
+Version:	0.5.0
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Networking
 URL:		http://deluge-torrent.org/
 Source0:	http://deluge-torrent.org/downloads/%{name}-%{version}.tar.gz
-# Source0-md5:	e4f9b3a39dfecf793dfcd62f2ccb1286
+# Source0-md5:	d83e6ee573ac9e2e8d11bc3f446da3f8
 #Source1:	%{name}-fixed-setup.py
 BuildRequires:	boost-program_options-devel
 BuildRequires:	boost-regex-devel
@@ -30,12 +30,8 @@ as DHT (Distributed Hash Tables) and UPnP (Universal Plug-n-Play) that
 allow one to more easily share BitTorrent data even from behind a
 router with virtually zero configuration of port-forwarding.
 
-%description -l pl.UTF-8
-
 %prep
 %setup -q
-#install -m 0755 %{SOURCE1} ./setup.py
-
 
 %build
 ## We forcibly don't store the installation directory during the build, so
@@ -48,15 +44,14 @@ router with virtually zero configuration of port-forwarding.
 	CFLAGS="%{optflags}" %{__python} setup.py build
 %endif
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
 
 ## ...then strip the unneeded shebang lines from some of the plugins...
-for FILE in $RPM_BUILD_ROOT%{py_sitedir}/%{name}/{delugegtk.py,delugeplugins.py}; do
-	sed -i 1d ${FILE};
-done
+# this seems, wrong, we don't pkg the .py
+# and if we do chmod -x on files should not fill autodeps
+#sed -i 1d $RPM_BUILD_ROOT%{py_sitedir}/%{name}/{delugegtk.py,delugeplugins.py}
 
 %find_lang %{name}
 
@@ -67,11 +62,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE
 %attr(755,root,root) %{_bindir}/%{name}
-%dir %{py_sitedir}/%{name}/
+%dir %{py_sitedir}/%{name}
 %{py_sitedir}/%{name}/*.py[co]
-%{py_sitedir}/%{name}/*.so
+%attr(755,root,root) %{py_sitedir}/%{name}/*.so
 %{py_sitedir}/%{name}-%{version}-py2.5.egg-info
 %{_desktopdir}/%{name}.desktop
-%dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*
 %{_pixmapsdir}/%{name}.xpm
+%{_datadir}/%{name}
