@@ -1,20 +1,21 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
-Summary(pl.UTF-8):	Klient BitTorrenta napisany w pythonie ze wspraciem dla UPnP i DHT
+Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
 Version:	0.5.0
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Networking
-URL:		http://deluge-torrent.org/
 Source0:	http://deluge-torrent.org/downloads/%{name}-%{version}.tar.gz
 # Source0-md5:	d83e6ee573ac9e2e8d11bc3f446da3f8
 #Source1:	%{name}-fixed-setup.py
+URL:		http://deluge-torrent.org/
 BuildRequires:	boost-program_options-devel
 BuildRequires:	boost-regex-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	libtool
-BuildRequires:	python-devel
+BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	rb_libtorrent-devel
+BuildRequires:	rpm-pythonprov
 Requires:	/bin/sh
 Requires:	python-dbus
 Requires:	python-pygtk-glade
@@ -30,6 +31,14 @@ as DHT (Distributed Hash Tables) and UPnP (Universal Plug-n-Play) that
 allow one to more easily share BitTorrent data even from behind a
 router with virtually zero configuration of port-forwarding.
 
+%description -l pl.UTF-8
+Deluge to nowy klient BitTorrenta stworzony przy użyciu Pythona i
+GTK+. Jego celem jest dostarczenie natywnego, w pełni funkcjonalnego
+klienta dla środowisk GTK+ pod Linuksem, takich jak GNOME czy XFCE.
+Obsługuje m.in. DHT (Distributed Hash Tables) i UPnP (Universal
+Plug-n-Play), co pozwala łatwiej współdzielić dane BitTorrenta nawet
+zza routera praktycznie bez konfiguracji przekierowywania portów.
+
 %prep
 %setup -q
 
@@ -38,10 +47,10 @@ router with virtually zero configuration of port-forwarding.
 ## we need to ensure that it is properly inserted into the code as required.
 %{__sed} -i -e "s:INSTALL_PREFIX = '@datadir@':INSTALL_PREFIX = '%{_usr}':" \
 	src/dcommon.py
-%ifarch x86_64 ppc64 sparc64
-	CFLAGS="%{optflags} -DAMD64" %{__python} setup.py build
+%ifarch %{x8664} ppc64 sparc64
+	CFLAGS="%{rpmcflags} -DAMD64" %{__python} setup.py build
 %else
-	CFLAGS="%{optflags}" %{__python} setup.py build
+	CFLAGS="%{rpmcflags}" %{__python} setup.py build
 %endif
 
 %install
@@ -65,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/%{name}
 %{py_sitedir}/%{name}/*.py[co]
 %attr(755,root,root) %{py_sitedir}/%{name}/*.so
-%{py_sitedir}/%{name}-%{version}-py2.5.egg-info
+%{py_sitedir}/%{name}-%{version}-py*.egg-info
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.xpm
 %{_datadir}/%{name}
