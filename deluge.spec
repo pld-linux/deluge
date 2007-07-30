@@ -5,7 +5,7 @@ Version:	0.5.3
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://download.deluge-torrent.org/stable/%{name}-%{version}.tar.gz
+Source0:	http://download.deluge-torrent.org/tarball/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	9e7b36bb946c5a1ddae0ffa9944a17e3
 #Source1:	%{name}-fixed-setup.py
 Patch0:		%{name}-pld.patch
