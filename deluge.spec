@@ -1,13 +1,14 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	0.5.0
-Release:	0.1
+Version:	0.5.3
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://deluge-torrent.org/downloads/%{name}-%{version}.tar.gz
-# Source0-md5:	d83e6ee573ac9e2e8d11bc3f446da3f8
+Source0:	http://download.deluge-torrent.org/stable/%{name}-%{version}.tar.gz
+# Source0-md5:	9e7b36bb946c5a1ddae0ffa9944a17e3
 #Source1:	%{name}-fixed-setup.py
+Patch0:		%{name}-pld.patch
 URL:		http://deluge-torrent.org/
 BuildRequires:	boost-program_options-devel
 BuildRequires:	boost-regex-devel
@@ -41,12 +42,13 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ## We forcibly don't store the installation directory during the build, so
 ## we need to ensure that it is properly inserted into the code as required.
 %{__sed} -i -e "s:INSTALL_PREFIX = '@datadir@':INSTALL_PREFIX = '%{_usr}':" \
-	src/dcommon.py
+	src/common.py
 %ifarch %{x8664} ppc64 sparc64
 	CFLAGS="%{rpmcflags} -DAMD64" %{__python} setup.py build
 %else
@@ -76,5 +78,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/%{name}/*.so
 %{py_sitedir}/%{name}-%{version}-py*.egg-info
 %{_desktopdir}/%{name}.desktop
-%{_pixmapsdir}/%{name}.xpm
+%{_pixmapsdir}/%{name}.png
 %{_datadir}/%{name}
