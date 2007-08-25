@@ -1,11 +1,11 @@
---- deluge-0.5.3.orig/setup.py	2007-07-27 11:18:35.000000000 +0200
-+++ deluge-0.5.3/setup.py	2007-07-30 21:36:15.000000000 +0200
+--- deluge-0.5.4.1/setup.py.orig	2007-08-13 09:29:43.000000000 +0200
++++ deluge-0.5.4.1/setup.py	2007-08-25 10:54:55.000000000 +0200
 @@ -110,7 +110,7 @@
                       '/usr/include/python' + python_version]
  
- 	if OS == "linux":
--		if os.WEXITSTATUS(os.system('grep -iq "Debian GNU/Linux 4.0\|Ubuntu 7.04\|Ubuntu 6.06\|Ubuntu 6.10\|Fedora Core release 6\|openSUSE 10.2\|Mandriva Linux release 2007.1\|Fedora release 7\|BLAG release 60001\|Yellow Dog Linux release 5.0 (Phoenix)" /etc/issue')) == 0:
-+		if os.WEXITSTATUS(os.system('grep -iq "Debian GNU/Linux 4.0\|Ubuntu 7.04\|Ubuntu 6.06\|Ubuntu 6.10\|Fedora Core release 6\|openSUSE 10.2\|Mandriva Linux release 2007.1\|Fedora release 7\|BLAG release 60001\|Yellow Dog Linux release 5.0 (Phoenix)\|PLD Linux" /etc/issue')) == 0:
- 			boosttype = 'nomt'
- 		else:
- 			boosttype = 'mt'
+     if OS == "linux":
+-        if os.WEXITSTATUS(os.system('grep -iq "Debian GNU/Linux 4.0\|Ubuntu 7.04\|Ubuntu 6.06\|Ubuntu 6.10\|Fedora Core release 6\|openSUSE 10.2\|Mandriva Linux release 2007.1\|Fedora release 7\|BLAG release 60001\|Yellow Dog Linux release 5.0 (Phoenix)\|CentOS release 5 (Final)" /etc/issue')) == 0:
++        if os.WEXITSTATUS(os.system('grep -iq "Debian GNU/Linux 4.0\|Ubuntu 7.04\|Ubuntu 6.06\|Ubuntu 6.10\|Fedora Core release 6\|openSUSE 10.2\|Mandriva Linux release 2007.1\|Fedora release 7\|BLAG release 60001\|Yellow Dog Linux release 5.0 (Phoenix)\|CentOS release 5 (Final)\|PLD Linux" /etc/issue')) == 0:
+             boosttype = 'nomt'
+         else:
+             boosttype = 'mt'
