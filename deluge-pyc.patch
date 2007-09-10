@@ -1,0 +1,31 @@
+diff -urN deluge-0.5.4.1/src/common.py deluge-0.5.4.1.new/src/common.py
+--- deluge-0.5.4.1/src/common.py	2007-08-13 09:29:41.000000000 +0200
++++ deluge-0.5.4.1.new/src/common.py	2007-09-10 02:16:18.262995393 +0200
+@@ -129,7 +129,7 @@
+         import webbrowser
+         webbrowser.open(link)
+     else:
+-        exec_deluge_command('browser.py', link)
++        exec_deluge_command('browser.pyc', link)
+ 
+ def is_url(url):
+     import re
+diff -urN deluge-0.5.4.1/src/interface.py deluge-0.5.4.1.new/src/interface.py
+--- deluge-0.5.4.1/src/interface.py	2007-08-13 09:29:41.000000000 +0200
++++ deluge-0.5.4.1.new/src/interface.py	2007-09-10 02:16:18.262995393 +0200
+@@ -115,13 +115,13 @@
+         self.update_interface = True
+ 
+         def new_release_check():
+-            common.exec_deluge_command('update.py', common.PROGRAM_VERSION)
++            common.exec_deluge_command('update.pyc', common.PROGRAM_VERSION)
+ 
+         def send_info():
+             import time
+             
+             def _run_script():
+-                common.exec_deluge_command('info.py', common.PROGRAM_VERSION)
++                common.exec_deluge_command('info.pyc', common.PROGRAM_VERSION)
+             
+             info_file = os.path.join(common.CONFIG_DIR, 'infosent')
+             
