@@ -11,6 +11,9 @@ Source0:	http://download.deluge-torrent.org/tarball/%{version}/%{name}-%{version
 Patch0:		%{name}-pld.patch
 Patch1:		%{name}-pyc.patch
 URL:		http://deluge-torrent.org/
+BuildRequires:	boost-array-devel
+BuildRequires:	boost-filesystem-devel
+BuildRequires:	boost-date_time-devel
 BuildRequires:	boost-program_options-devel
 BuildRequires:	boost-regex-devel
 BuildRequires:	desktop-file-utils
