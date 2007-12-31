@@ -21,6 +21,7 @@ BuildRequires:	rpm-pythonprov
 Requires:	/bin/sh
 Requires:	hicolor-icon-theme
 Requires:	python-dbus
+Requires:	python-gnome-extras-mozilla
 Requires:	python-pygtk-glade
 Requires:	python-pyxdg
 Requires:	rb_libtorrent
