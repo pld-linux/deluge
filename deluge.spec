@@ -12,8 +12,8 @@ Patch0:		%{name}-pld.patch
 Patch1:		%{name}-pyc.patch
 URL:		http://deluge-torrent.org/
 BuildRequires:	boost-array-devel
-BuildRequires:	boost-filesystem-devel
 BuildRequires:	boost-date_time-devel
+BuildRequires:	boost-filesystem-devel
 BuildRequires:	boost-program_options-devel
 BuildRequires:	boost-regex-devel
 BuildRequires:	desktop-file-utils
@@ -21,6 +21,9 @@ BuildRequires:	libtool
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	rb_libtorrent-devel
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.311
+Requires(post,postun):	gtk+2
+Requires(post,postun):	hicolor-icon-theme
 Requires:	/bin/sh
 Requires:	hicolor-icon-theme
 Requires:	python-dbus
