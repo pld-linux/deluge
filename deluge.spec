@@ -1,12 +1,12 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	0.5.8.1
-Release:	2
+Version:	0.5.8.3
+Release:	0.9
 License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://download.deluge-torrent.org/tarball/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	19c1ac3ba6910f52b5918b56526e74a0
+# Source0-md5:	ba4ecd51b4bd52e0946cfeff07d7df80
 #Source1:	%{name}-fixed-setup.py
 Patch0:		%{name}-pld.patch
 URL:		http://deluge-torrent.org/
