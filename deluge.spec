@@ -72,6 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 # and if we do chmod -x on files should not fill autodeps
 #sed -i 1d $RPM_BUILD_ROOT%{py_sitedir}/%{name}/{delugegtk.py,delugeplugins.py}
 
+# unsupported(?)
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/la
+
 %find_lang %{name}
 
 %clean
