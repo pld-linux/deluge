@@ -10,11 +10,7 @@ Source0:	http://download.deluge-torrent.org/tarball/%{version}/%{name}-%{version
 #Source1:	%{name}-fixed-setup.py
 Patch0:		%{name}-pld.patch
 URL:		http://deluge-torrent.org/
-BuildRequires:	boost-array-devel
-BuildRequires:	boost-date_time-devel
-BuildRequires:	boost-filesystem-devel
-BuildRequires:	boost-program_options-devel
-BuildRequires:	boost-regex-devel
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	desktop-file-utils
 BuildRequires:	libtool
 BuildRequires:	python-devel >= 1:2.5
