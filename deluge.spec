@@ -2,7 +2,6 @@
 # TODO:
 # - fix building with libtorrent-rasterbar libs, for now it is
 # disabled. Deluge uses its internal libtorrent module
-# - lang files
 #
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
@@ -16,6 +15,7 @@ Source0:	http://download.deluge-torrent.org/source/%{version}/%{name}-%{version}
 Patch0:		%{name}-libtorrent.patch
 URL:		http://deluge-torrent.org/
 BuildRequires:	boost-devel >= 1.36.0
+BuildRequires:	boost-python-devel >= 1.36.0
 BuildRequires:	desktop-file-utils
 BuildRequires:	libtool
 BuildRequires:	python-devel >= 1:2.5
@@ -61,6 +61,18 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+
+# move lang files into /usr/share/locale, find_lang does not work on
+# this. Looks really ugly, if you know a better way please do use it :)
+install -d $RPM_BUILD_ROOT%{_localedir}
+mv -f $RPM_BUILD_ROOT%{py_sitedir}/%{name}/i18n/* $RPM_BUILD_ROOT%{_localedir}
+
+# unsupported(?)
+rm -rf $RPM_BUILD_ROOT%{_localedir}/la
+rm -rf $RPM_BUILD_ROOT%{_localedir}/pms
+
+# Remove *.py files. We don't package them.
+find $RPM_BUILD_ROOT%{py_sitedir}/%{name} -type f -name '*.py' -print0 | xargs -0 rm -f
 
 #%%find_lang %{name}
 
@@ -155,3 +167,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/128x128/apps/deluge.png
 %{_iconsdir}/hicolor/192x192/apps/deluge.png
 #{_iconsdir}/hicolor/256x256/apps/deluge.png
+%{_localedir}/*/LC_MESSAGES/%{name}.mo
