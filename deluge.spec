@@ -18,6 +18,7 @@ BuildRequires:	boost-devel >= 1.36.0
 BuildRequires:	boost-python-devel >= 1.36.0
 BuildRequires:	desktop-file-utils
 BuildRequires:	libtool
+BuildRequires:	openssl-devel
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.311
