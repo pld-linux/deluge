@@ -20,6 +20,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
 BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.311
 Requires(post,postun):	gtk+2
@@ -63,7 +64,7 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
 
-# move lang files into /usr/share/locale, find_lang does not work on
+# move lang files into %{_datadir}/locale, find_lang does not work on
 # this. Looks really ugly, if you know a better way please do use it :)
 install -d $RPM_BUILD_ROOT%{_localedir}
 mv -f $RPM_BUILD_ROOT%{py_sitedir}/%{name}/i18n/* $RPM_BUILD_ROOT%{_localedir}
