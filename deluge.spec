@@ -1,18 +1,12 @@
-#
-# TODO:
-# - fix building with libtorrent-rasterbar libs, for now it is
-# disabled. Deluge uses its internal libtorrent module
-#
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	1.0.5
+Version:	1.0.6
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://download.deluge-torrent.org/source/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	24fd36978b2713212cf1ae679f8066d5
-Patch0:		%{name}-libtorrent.patch
+# Source0-md5:	96be98b4e7f8c66ec243e8148b897291
 URL:		http://deluge-torrent.org/
 BuildRequires:	boost-devel >= 1.36.0
 BuildRequires:	boost-python-devel >= 1.36.0
@@ -51,7 +45,6 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %ifarch %{x8664} ppc64 sparc64
@@ -93,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog LICENSE README
 %attr(755,root,root) %{_bindir}/%{name}
 %attr(755,root,root) %{_bindir}/%{name}d
+%{_mandir}/man1/%{name}.1.gz
+%{_mandir}/man1/%{name}d.1.gz
+%{_pixmapsdir}/%{name}.xpm
 %dir %{py_sitedir}/%{name}
 %dir %{py_sitedir}/%{name}/core
 %dir %{py_sitedir}/%{name}/data
@@ -132,7 +128,6 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/%{name}/ui/gtkui/*.py[co]
 %{py_sitedir}/%{name}/ui/gtkui/glade/*.glade
 %{py_sitedir}/%{name}/ui/null/*.py[co]
-%{py_sitedir}/%{name}/ui/webui/LICENSE
 %{py_sitedir}/%{name}/ui/webui/*.py[co]
 %{py_sitedir}/%{name}/ui/webui/lib/*.py[co]
 %{py_sitedir}/%{name}/ui/webui/lib/newforms_portable/*.py[co]
