@@ -63,13 +63,13 @@ install -d $RPM_BUILD_ROOT%{_localedir}
 mv -f $RPM_BUILD_ROOT%{py_sitedir}/%{name}/i18n/* $RPM_BUILD_ROOT%{_localedir}
 
 # unsupported(?)
-rm -rf $RPM_BUILD_ROOT%{_localedir}/la
-rm -rf $RPM_BUILD_ROOT%{_localedir}/pms
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/la
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pms
 
 # Remove *.py files. We don't package them.
 find $RPM_BUILD_ROOT%{py_sitedir}/%{name} -type f -name '*.py' -print0 | xargs -0 rm -f
 
-#%%find_lang %{name}
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -80,14 +80,11 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %update_icon_cache hicolor
 
-#%%files -f %{name}.lang
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE README
-%attr(755,root,root) %{_bindir}/%{name}
-%attr(755,root,root) %{_bindir}/%{name}d
-%{_mandir}/man1/%{name}.1.gz
-%{_mandir}/man1/%{name}d.1.gz
+%attr(755,root,root) %{_bindir}/deluge
+%attr(755,root,root) %{_bindir}/deluged
 %{_pixmapsdir}/%{name}.xpm
 %dir %{py_sitedir}/%{name}
 %dir %{py_sitedir}/%{name}/core
@@ -164,4 +161,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/128x128/apps/deluge.png
 %{_iconsdir}/hicolor/192x192/apps/deluge.png
 #{_iconsdir}/hicolor/256x256/apps/deluge.png
-%{_localedir}/*/LC_MESSAGES/%{name}.mo
+%{_mandir}/man1/deluge.1*
+%{_mandir}/man1/deluged.1*
