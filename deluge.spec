@@ -1,12 +1,12 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	1.0.6
+Version:	1.0.7
 Release:	0.1
-License:	GPL v2+
+License:	GPL v3
 Group:		X11/Applications/Networking
 Source0:	http://download.deluge-torrent.org/source/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	96be98b4e7f8c66ec243e8148b897291
+# Source0-md5:	19f782970aedaa9f53b70699f3ee099a
 URL:		http://deluge-torrent.org/
 BuildRequires:	boost-devel >= 1.36.0
 BuildRequires:	boost-python-devel >= 1.36.0
@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE README
+%doc ChangeLog README
 %attr(755,root,root) %{_bindir}/deluge
 %attr(755,root,root) %{_bindir}/deluged
 %{_pixmapsdir}/%{name}.xpm
@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/%{name}/ui/webui/scripts
 %dir %{py_sitedir}/%{name}/ui/webui/static
 %dir %{py_sitedir}/%{name}/ui/webui/static/images
-%dir %{py_sitedir}/%{name}/ui/webui/static/images/tango
+%dir %{py_sitedir}/%{name}/ui/webui/static/images/16
 %dir %{py_sitedir}/%{name}/ui/webui/templates
 %dir %{py_sitedir}/%{name}/ui/webui/templates/classic
 %dir %{py_sitedir}/%{name}/ui/webui/templates/white
@@ -139,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/%{name}/ui/webui/static/images/*.gif
 %{py_sitedir}/%{name}/ui/webui/static/images/*.jpg
 %{py_sitedir}/%{name}/ui/webui/static/images/*.png
-%{py_sitedir}/%{name}/ui/webui/static/images/tango/*.png
+%{py_sitedir}/%{name}/ui/webui/static/images/16/*.png
 %{py_sitedir}/%{name}/ui/webui/templates/classic/*.cfg
 %{py_sitedir}/%{name}/ui/webui/templates/classic/*.html
 %{py_sitedir}/%{name}/ui/webui/templates/classic/*.txt
@@ -160,6 +160,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/96x96/apps/deluge.png
 %{_iconsdir}/hicolor/128x128/apps/deluge.png
 %{_iconsdir}/hicolor/192x192/apps/deluge.png
-#{_iconsdir}/hicolor/256x256/apps/deluge.png
 %{_mandir}/man1/deluge.1*
 %{_mandir}/man1/deluged.1*
