@@ -126,6 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons
 %dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons/16
 %dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons/32
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/images
 %dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/js
 %dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes
 %dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/classic
