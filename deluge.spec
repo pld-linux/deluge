@@ -1,12 +1,12 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	1.0.7
+Version:	1.1.0
 Release:	0.1
 License:	GPL v3
 Group:		X11/Applications/Networking
 Source0:	http://download.deluge-torrent.org/source/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	19f782970aedaa9f53b70699f3ee099a
+# Source0-md5:	22d8016934cc891da4e0b75949681703
 URL:		http://deluge-torrent.org/
 BuildRequires:	boost-devel >= 1.36.0
 BuildRequires:	boost-python-devel >= 1.36.0
@@ -63,11 +63,19 @@ install -d $RPM_BUILD_ROOT%{_localedir}
 mv -f $RPM_BUILD_ROOT%{py_sitedir}/%{name}/i18n/* $RPM_BUILD_ROOT%{_localedir}
 
 # unsupported(?)
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/iu
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/la
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pms
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/si
+
+%{__rm} $RPM_BUILD_ROOT%{_localedir}/deluge.pot
 
 # Remove *.py files. We don't package them.
 find $RPM_BUILD_ROOT%{py_sitedir}/%{name} -type f -name '*.py' -print0 | xargs -0 rm -f
+
+# Move svg icon to proper place
+install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps
+mv -f $RPM_BUILD_ROOT%{_iconsdir}/scalable/apps/deluge.svg $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/
 
 %find_lang %{name}
 
@@ -93,9 +101,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/%{name}/data/pixmaps/flags
 %dir %{py_sitedir}/%{name}/plugins
 %dir %{py_sitedir}/%{name}/ui
+%dir %{py_sitedir}/%{name}/ui/console
+%dir %{py_sitedir}/%{name}/ui/console/commands
 %dir %{py_sitedir}/%{name}/ui/gtkui
 %dir %{py_sitedir}/%{name}/ui/gtkui/glade
-%dir %{py_sitedir}/%{name}/ui/null
 %dir %{py_sitedir}/%{name}/ui/webui
 %dir %{py_sitedir}/%{name}/ui/webui/lib
 %dir %{py_sitedir}/%{name}/ui/webui/lib/newforms_portable
@@ -109,22 +118,36 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/%{name}/ui/webui/static/images
 %dir %{py_sitedir}/%{name}/ui/webui/static/images/16
 %dir %{py_sitedir}/%{name}/ui/webui/templates
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/render
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/render/html
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/css
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons/16
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons/32
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/js
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/classic
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/classic/mime_icons
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/white
+%dir %{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/white/mime_icons
 %dir %{py_sitedir}/%{name}/ui/webui/templates/classic
 %dir %{py_sitedir}/%{name}/ui/webui/templates/white
 %attr(755,root,root) %{py_sitedir}/%{name}/*.so
 %{py_sitedir}/%{name}/*.py[co]
 %{py_sitedir}/%{name}/core/*.py[co]
 %{py_sitedir}/%{name}/data/GeoIP.dat
-%{py_sitedir}/%{name}/data/revision
 %{py_sitedir}/%{name}/data/pixmaps/*.ico
 %{py_sitedir}/%{name}/data/pixmaps/*.png
 %{py_sitedir}/%{name}/data/pixmaps/*.svg
 %{py_sitedir}/%{name}/data/pixmaps/flags/*.png
 %{py_sitedir}/%{name}/plugins/*.py[co]
 %{py_sitedir}/%{name}/ui/*.py[co]
+%{py_sitedir}/%{name}/ui/console/*.py[co]
+%{py_sitedir}/%{name}/ui/console/commands/*.py[co]
 %{py_sitedir}/%{name}/ui/gtkui/*.py[co]
 %{py_sitedir}/%{name}/ui/gtkui/glade/*.glade
-%{py_sitedir}/%{name}/ui/null/*.py[co]
 %{py_sitedir}/%{name}/ui/webui/*.py[co]
 %{py_sitedir}/%{name}/ui/webui/lib/*.py[co]
 %{py_sitedir}/%{name}/ui/webui/lib/newforms_portable/*.py[co]
@@ -140,8 +163,25 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/%{name}/ui/webui/static/images/*.jpg
 %{py_sitedir}/%{name}/ui/webui/static/images/*.png
 %{py_sitedir}/%{name}/ui/webui/static/images/16/*.png
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/*.cfg
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/*.css
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/*.html
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/*.js
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/render/html/*.html
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/css/*.css
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons/16/*.png
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/icons/32/*.png
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/images/*.gif
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/js/*.js
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/classic/*.css
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/classic/*.png
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/classic/mime_icons/*.png
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/white/*.css
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/white/*.png
+%{py_sitedir}/%{name}/ui/webui/templates/ajax/static/themes/white/mime_icons/*.png
 %{py_sitedir}/%{name}/ui/webui/templates/classic/*.cfg
 %{py_sitedir}/%{name}/ui/webui/templates/classic/*.html
+%{py_sitedir}/%{name}/ui/webui/templates/classic/*.js
 %{py_sitedir}/%{name}/ui/webui/templates/classic/*.txt
 %{py_sitedir}/%{name}/ui/webui/templates/white/*.cfg
 %{py_sitedir}/%{name}/ui/webui/templates/white/*.css
@@ -160,5 +200,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/96x96/apps/deluge.png
 %{_iconsdir}/hicolor/128x128/apps/deluge.png
 %{_iconsdir}/hicolor/192x192/apps/deluge.png
+%{_iconsdir}/hicolor/scalable/apps/deluge.svg
 %{_mandir}/man1/deluge.1*
 %{_mandir}/man1/deluged.1*
