@@ -6,7 +6,7 @@ Version:	1.2.0
 Release:	0.%{_rc}.0
 License:	GPL v3
 Group:		X11/Applications/Networking
-Source0:	http://download.deluge-torrent.info/source/%{name}-%{version}_%{_rc}.tar.lzma
+Source0:	http://download.deluge-torrent.info/pub/deluge/source/%{name}-%{version}_%{_rc}.tar.lzma
 # Source0-md5:	197bd2fdd83fd2d03ca41031d8767456
 URL:		http://deluge-torrent.info/
 BuildRequires:	desktop-file-utils
