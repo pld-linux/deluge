@@ -11,6 +11,7 @@ Source0:	http://download.deluge-torrent.info/source/%{name}-%{version}_%{_rc}.ta
 URL:		http://deluge-torrent.info/
 BuildRequires:	desktop-file-utils
 BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-libtorrent-rasterbar
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.311
