@@ -18,11 +18,12 @@ BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	zlib-devel
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires:	/bin/sh
-Requires:	librsvg
 Requires:	hicolor-icon-theme
+Requires:	librsvg
 Requires:	python-dbus
 Requires:	python-gnome-extras-mozilla
 Requires:	python-pygtk-glade
