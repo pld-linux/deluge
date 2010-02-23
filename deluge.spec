@@ -8,7 +8,6 @@ Group:		X11/Applications/Networking
 Source0:	http://download.deluge-torrent.org/source/%{name}-%{version}.tar.bz2
 # Source0-md5:	ea6d6c7af48ca05e4e808c960563d78d
 URL:		http://deluge-torrent.org/
-BuildRequires:	desktop-file-utils
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-libtorrent-rasterbar
 BuildRequires:	python-setuptools
@@ -54,7 +53,7 @@ Plug-n-Play), co pozwala łatwiej współdzielić dane BitTorrenta nawet
 zza routera praktycznie bez konfiguracji przekierowywania portów.
 
 %prep
-%setup -q 
+%setup -q
 
 %build
 %ifarch %{x8664} ppc64 sparc64
