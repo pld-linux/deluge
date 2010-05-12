@@ -1,5 +1,5 @@
---- /home/users/baggins/devel/PLD/rpm/BUILD/deluge-1.2.3/deluge/data/share/applications/deluge.desktop~	2010-03-27 20:37:04.000000000 +0100
-+++ /home/users/baggins/devel/PLD/rpm/BUILD/deluge-1.2.3/deluge/data/share/applications/deluge.desktop	2010-05-12 15:26:49.494598808 +0200
+--- deluge-1.2.3/deluge/data/share/applications/deluge.desktop~	2010-03-27 20:37:04.000000000 +0100
++++ deluge-1.2.3/deluge/data/share/applications/deluge.desktop	2010-05-12 15:26:49.494598808 +0200
 @@ -7,6 +7,6 @@
  Icon=deluge
  Terminal=false
