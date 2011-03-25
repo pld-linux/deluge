@@ -76,11 +76,8 @@ mv -f $RPM_BUILD_ROOT%{py_sitescriptdir}/%{name}/i18n/* $RPM_BUILD_ROOT%{_locale
 # clean *.py files from the package, macro doesn't catch those
 find $RPM_BUILD_ROOT%{py_sitescriptdir}/%{name} -name '*.py' -exec %{__rm} {} \;
 
-# unsupported(?)
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/iu
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/la
+# not supported in glibc (as for 2.13-3)
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pms
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/si
 
 %{__rm} $RPM_BUILD_ROOT%{_localedir}/deluge.pot
 
