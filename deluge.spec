@@ -1,13 +1,12 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	1.3.1
-Release:	2
+Version:	1.3.3
+Release:	1
 License:	GPL v3
 Group:		X11/Applications/Networking
 Source0:	http://download.deluge-torrent.org/source/%{name}-%{version}.tar.bz2
-# Source0-md5:	496a9cfaf01e6cf7ab141498acf2d1f1
-Patch0:		%{name}-desktop.patch
+# Source0-md5:	4027c60bb5d1c5da61e97a47e62ab1ab
 URL:		http://deluge-torrent.org/
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-libtorrent-rasterbar
@@ -56,7 +55,6 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %ifarch %{x8664} ppc64 sparc64
@@ -76,10 +74,8 @@ mv -f $RPM_BUILD_ROOT%{py_sitescriptdir}/%{name}/i18n/* $RPM_BUILD_ROOT%{_locale
 # clean *.py files from the package, macro doesn't catch those
 find $RPM_BUILD_ROOT%{py_sitescriptdir}/%{name} -name '*.py' -exec %{__rm} {} \;
 
-# not supported in glibc (as for 2.13-3)
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pms
-
-%{__rm} $RPM_BUILD_ROOT%{_localedir}/deluge.pot
+# not supported in glibc (as for 2.14-15)
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{pms,lb}
 
 # Move svg icon to proper place
 install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps
@@ -119,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitescriptdir}/%{name}/ui/web
 %{py_sitescriptdir}/%{name}/*.py[co]
 %{py_sitescriptdir}/%{name}/core/*.py[co]
+%{py_sitescriptdir}/%{name}/data/pixmaps/*.gif
 %{py_sitescriptdir}/%{name}/data/pixmaps/*.ico
 %{py_sitescriptdir}/%{name}/data/pixmaps/*.png
 %{py_sitescriptdir}/%{name}/data/pixmaps/*.svg
