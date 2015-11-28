@@ -58,14 +58,14 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 
 %build
 %ifarch %{x8664} ppc64 sparc64
-	CFLAGS="%{rpmcflags} -DAMD64" %{__python} setup.py build
+	CFLAGS="%{rpmcflags} -DAMD64" %py_build
 %else
-	CFLAGS="%{rpmcflags}" %{__python} setup.py build
+	CFLAGS="%{rpmcflags}" %py_build
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+%py_install -O1 --skip-build --root $RPM_BUILD_ROOT
 
 # move lang files into %{_datadir}/locale, find_lang does not work on
 # this. Looks really ugly, if you know a better way please do use it :)
