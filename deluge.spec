@@ -12,7 +12,7 @@ BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-libtorrent-rasterbar >= 0.14.9
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.710
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	/bin/sh
