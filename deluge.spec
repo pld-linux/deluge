@@ -1,18 +1,18 @@
 Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
-Version:	2.1.1
-Release:	3
+Version:	2.2.0
+Release:	1
 License:	GPL v3
 Group:		X11/Applications/Networking
-Source0:	https://ftp.osuosl.org/pub/deluge/source/2.1/%{name}-%{version}.tar.xz
-# Source0-md5:	2f132a55217fd250967678c9a555bad5
-Patch0:		%{name}-no-wheel.patch
+Source0:	https://ftp.osuosl.org/pub/deluge/source/2.2/%{name}-%{version}.tar.xz
+# Source0-md5:	18197420b85ed45683815d1cede6c278
 URL:		https://deluge-torrent.org/
 BuildRequires:	closure-compiler
 BuildRequires:	intltool
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
 BuildRequires:	python3 >= 1:3.6
-BuildRequires:	python3-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	tar >= 1:1.22
@@ -67,15 +67,17 @@ zza routera praktycznie bez konfiguracji przekierowywania portów.
 
 %prep
 %setup -q
-%patch -P 0 -p1
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d  $RPM_BUILD_ROOT%{_desktopdir}
 
-%py3_install --skip-build
+%py3_install_pyproject
+
+cp -p deluge/ui/data/share/applications/deluge.desktop $RPM_BUILD_ROOT%{_desktopdir}/
 
 # nap,pms not supported in glibc (as for 2.14-15)
 # iu,te,tlh,ur empty (as of deluge 2.1.1)
@@ -175,8 +177,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/%{name}/ui/web/js
 %{py3_sitescriptdir}/%{name}/ui/web/render
 %{py3_sitescriptdir}/%{name}/ui/web/themes
-%{py3_sitescriptdir}/%{name}-*-py*.egg-info
-%{_datadir}/appdata/deluge.appdata.xml
+%{py3_sitescriptdir}/%{name}-%{version}.dist-info
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 %{_iconsdir}/hicolor/*x*/apps/deluge.png
