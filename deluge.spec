@@ -2,7 +2,7 @@ Summary:	A Python BitTorrent client with support for UPnP and DHT
 Summary(pl.UTF-8):	Klient BitTorrenta napisany w Pythonie ze wspraciem dla UPnP i DHT
 Name:		deluge
 Version:	2.2.0
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Applications/Networking
 Source0:	https://ftp.osuosl.org/pub/deluge/source/2.2/%{name}-%{version}.tar.xz
@@ -81,7 +81,7 @@ cp -p deluge/ui/data/share/applications/deluge.desktop $RPM_BUILD_ROOT%{_desktop
 
 # nap,pms not supported in glibc (as for 2.14-15)
 # iu,te,tlh,ur empty (as of deluge 2.1.1)
-%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/%{name}/i18n/{iu,nap,pms,te,tlh,ur}
+%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/%{name}/i18n/{iu,mo,nap,pms,te,tlh,ur}
 
 # move lang files into %{_localedir}, find_lang does not work on
 # this. Looks really ugly, if you know a better way please do use it :)
